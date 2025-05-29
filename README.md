@@ -1,6 +1,6 @@
 # Laporan Proyek Machine Learning - Ridwan Setiawan (abu_akhdan)
 
-## **Domain Proyek**
+## **1. Domain Proyek**
 
 Proyek ini berfokus pada bidang **pendidikan tinggi**, khususnya analisis risiko putus kuliah (dropout) mahasiswa di awal masa studi. Dengan meningkatnya jumlah mahasiswa yang tidak menyelesaikan studinya tepat waktu atau bahkan keluar sebelum lulus, terdapat kebutuhan mendesak untuk membangun sistem prediktif yang dapat mendeteksi mahasiswa yang berpotensi mengalami masalah akademik sejak dini[1,2,3].
 
@@ -13,25 +13,25 @@ Referensi utama:
 - [2] Kok, C. L., Ho, C. K., Chen, L., Koh, Y. Y., & Tian, B. (2024). A Novel Predictive Modeling for Student Attrition Utilizing Machine Learning and Sustainable Big Data Analytics. Applied Sciences, 14(21), 9633.
 - [3] Martins, M. V., Baptista, L., Machado, J., & Realinho, V. (2023). Multi-class phased prediction of academic performance and dropout in higher education. Applied Sciences, 13(8), 4702.
 
-## **Business Understanding**
+## **2. Business Understanding**
 
 Putus kuliah di tingkat pendidikan tinggi merupakan isu serius yang berdampak luas, baik secara institusional, personal, maupun sosial. Di banyak negara, termasuk Portugal sebagai lokasi dataset ini, angka dropout yang tinggi menyebabkan kerugian finansial bagi institusi pendidikan, meningkatnya beban ekonomi keluarga, serta rendahnya capaian pendidikan nasional.
 
 Melalui pendekatan data-driven, kita dapat membangun sistem peringatan dini untuk mengidentifikasi mahasiswa yang berisiko tinggi tidak menyelesaikan studi. Deteksi dini ini memungkinkan intervensi personal yang lebih tepat sasaran, seperti bimbingan akademik atau dukungan finansial.
 
-### **Problem Statements**
+### **2.1. Problem Statements**
 
 1. Bagaimana memprediksi status akhir mahasiswa (dropout, enrolled, graduate) hanya dari data saat pendaftaran?
 2. Fitur-fitur mana yang paling memengaruhi kemungkinan seorang mahasiswa mengalami dropout?
 3. Seberapa baik model machine learning dapat mengklasifikasikan status akhir mahasiswa dalam skenario multikelas yang tidak seimbang?
 
-### **Goals**
+### **2.2. Goals**
 
 1. Mengembangkan model prediktif berbasis data awal mahasiswa untuk memetakan kemungkinan status akhir studi.
 2. Melakukan analisis korelasi dan eksploratif untuk mengidentifikasi fitur paling signifikan terhadap status kelulusan.
 3. Mengevaluasi performa model dalam skenario multikelas dan dataset yang imbalanced, serta melakukan balancing dengan SMOTE-Tomek.
 
-### **Solution Statements**
+### **2.3. Solution Statements**
 
 Untuk menjawab tujuan di atas, pendekatan berikut diterapkan:
 
@@ -41,11 +41,11 @@ Untuk menjawab tujuan di atas, pendekatan berikut diterapkan:
 - Menggunakan hyperparameter tuning untuk meningkatkan akurasi model terbaik, serta interpretabilitas melalui visualisasi fitur penting.
 
 
-## **Data Understanding**
+## **3. Data Understanding**
 
 Dataset yang digunakan dalam proyek ini diperoleh dari repositori UCI Machine Learning yang berjudul [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/).dan berisi 4.424 data mahasiswa yang bersumber dari `perguruan tinggi di portugal`. Masing-masing baris mewakili satu mahasiswa dengan total 37 atribut, termasuk informasi demografis, akademik, sosial ekonomi, serta label status akhir mahasiswa (Target).
 
-### **Deskripsi Fitur**
+### **3.1. Deskripsi Fitur**
 
 Dataset ini memiliki 36 fitur input dan 1 fitur target. Berikut adalah daftar lengkap fitur:
 
@@ -91,7 +91,7 @@ Fitur ke-37 adalah:
 
 Seluruh fitur tidak memiliki missing values, dan sebagian besar merupakan data numerik atau dikodekan sebagai angka kategorik.
 
-### **Distribusi Kelas (Target)**
+### **3.2. Distribusi Kelas (Target)**
 
 Berikut merupakan distribusi target (kelas) yang ada pada dataset ditampilkan pada gambar berikut:
 ![Distribusi Kelas Target Mahasiswa](media/output_12_0.png)
@@ -106,7 +106,7 @@ berdasarkan gambar di atas maka distribusi label target menunjukkan ketidakseimb
 
 Distribusi ini memperlihatkan bahwa kelas "Graduate" merupakan mayoritas, sedangkan "Enrolled" merupakan kelas minoritas yang paling sedikit jumlahnya.
 
-### 3.3 Statistik Deskriptif
+### 3.3. Statistik Deskriptif
 
 Statistik deskriptif memberikan ringkasan awal terhadap fitur numerik dan kategorikal dalam dataset. Tujuannya untuk:
 
@@ -139,7 +139,7 @@ Meskipun banyak fitur direpresentasikan sebagai integer, analisis `nunique()` me
 
 Fitur-fitur tersebut akan dipertimbangkan sebagai kategorikal saat proses encoding sebelum modeling, meskipun secara teknis bertipe integer.
 
-### 3.4 Korelasi Antar Fitur
+### 3.4. Korelasi Antar Fitur
 
 Analisis korelasi Spearman dengan hasil:
 ![Heatmap Korelasi Spearman](media/output_22_1.png)
@@ -196,11 +196,29 @@ Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear 
 - Gender: -0.22
 - Debtor: -0.24
 - Curricular units 2nd sem (enrolled): 0.17
-- Admission grade: 0.16
+- Admission grade: 0.13
 
-### 3.5 Visualisasi Fitur Utama
+### 3.5. Visualisasi Fitur Utama
 
 Visualisasi dilakukan untuk masing-masing fitur yang memiliki korelasi > 0.20 atau < -0.20 terhadap target. Diagram yang digunakan meliputi pie chart, histogram dengan KDE, dan boxplot terhadap target. Visualisasi ini mengungkapkan pola yang berbeda antara mahasiswa yang dropout, masih aktif, atau sudah lulus.
+
+**1. Interpretasi: Tuition fees up to date**
+
+![TuitionFee](media/output_28_0.png)
+
+Visualisasi menunjukkan perbedaan yang sangat mencolok antara mahasiswa yang **membayar biaya kuliah secara tepat waktu (1)** dan yang **tidak (0)**.
+
+- Mahasiswa yang membayar tepat waktu (`1`) **dominan lulus (`Graduate`)**, jumlahnya lebih dari dua kali lipat dibandingkan kategori lainnya.
+- Sebaliknya, mahasiswa yang tidak membayar tepat waktu (`0`) memiliki jumlah **Dropout** yang signifikan, sementara angka kelulusannya sangat rendah.
+
+**2. Interpretasi: Scholarship holder**
+
+![scholarship](media/output_30_0.png)
+
+Dari grafik terlihat perbedaan distribusi yang cukup signifikan antara mahasiswa penerima beasiswa (`1`) dan non-penerima (`0`):
+
+- Di antara **non-penerima beasiswa (0)**, jumlah `Dropout` dan `Graduate` relatif tinggi dan seimbang, tetapi tetap menunjukkan bahwa banyak mahasiswa yang **tidak menerima beasiswa cenderung mengalami dropout**.
+- Sebaliknya, **penerima beasiswa (1)** didominasi oleh mahasiswa yang berhasil **`Graduate`**, sementara jumlah `Dropout` jauh lebih rendah.
 
 
 
