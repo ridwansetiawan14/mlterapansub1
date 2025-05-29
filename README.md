@@ -440,25 +440,83 @@ Berikut hasil evaluasi awal (sebelum tuning) dari lima model yang digunakan:
 
 Visualisasi classification report & confusion matrix untuk tiap model:
 
-1. Classification Report & Confusion Matrix - Logistic Regression
-   `Logistic Regression - Classification Report`
-              `precision`    `recall`  `f1-score`   `support`
+1. **Classification Report & Confusion Matrix - Logistic Regression**
 
-           0     0.8632    0.6444    0.7379       284
-           1     0.4032    0.6415    0.4951       159
-           2     0.8500    0.8077    0.8283       442
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.8632    | 0.6444 | 0.7379   | 284     |
+| 1     | 0.4032    | 0.6415 | 0.4951   | 159     |
+| 2     | 0.8500    | 0.8077 | 0.8283   | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.7254   | 885     |
+| Macro Avg | 0.7055  | 0.6979 | 0.6871   | 885     |
+| Weighted Avg | 0.7740 | 0.7254 | 0.7394  | 885     |
 
-    accuracy                         0.7254       885
-   macro avg     0.7055    0.6979    0.6871       885
-weighted avg     0.7740    0.7254    0.7394       885
+![Confusion Matrix - Logistic Regression](media/output_82_1.png)
 
+___
+2. **Classification Report & Confusion Matrix - SVM**
 
-3. 
-  
-- **[Gambar 2: Classification Report & Confusion Matrix - SVM]**
-- **[Gambar 3: Classification Report & Confusion Matrix - Decision Tree]**
-- **[Gambar 4: Classification Report & Confusion Matrix - Random Forest]**
-- **[Gambar 5: Classification Report & Confusion Matrix - XGBoost]**
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.8198    | 0.6408 | 0.7194   | 284     |
+| 1     | 0.4077    | 0.6667 | 0.5060   | 159     |
+| 2     | 0.8536    | 0.7783 | 0.8142   | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.7141   | 885     |
+| Macro Avg | 0.6937  | 0.6953 | 0.6798   | 885     |
+| Weighted Avg | 0.7626 | 0.7141 | 0.7284  | 885     |
+
+![Confusion Matrix - SVM](media/output_84_1.png)
+
+___
+
+3. **Classification Report & Confusion Matrix - Decision Tree**
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.7045    | 0.7218 | 0.7130   | 284     |
+| 1     | 0.3230    | 0.3270 | 0.3250   | 159     |
+| 2     | 0.7829    | 0.7670 | 0.7749   | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.6734   | 885     |
+| Macro Avg | 0.6035  | 0.6053 | 0.6043   | 885     |
+| Weighted Avg | 0.6751 | 0.6734 | 0.6742  | 885     |
+
+![Confusion Matrix - DT](media/output_88_1.png)
+   ___
+4.  **Classification Report & Confusion Matrix - Random Forest**
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.8069    | 0.7359 | 0.7698   | 284     |
+| 1     | 0.4437    | 0.4465 | 0.4451   | 159     |
+| 2     | 0.8197    | 0.8643 | 0.8414   | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.7480   | 885     |
+| Macro Avg | 0.6901  | 0.6822 | 0.6854   | 885     |
+| Weighted Avg | 0.7481 | 0.7480 | 0.7472  | 885     |
+
+![Confusion Matrix - RF](media/output_86_1.png)
+
+---
+   
+5. **Classification Report & Confusion Matrix - XGBoost**
+
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.7895    | 0.7394 | 0.7636   | 284     |
+| 1     | 0.4472    | 0.4528 | 0.4500   | 159     |
+| 2     | 0.8319    | 0.8620 | 0.8467   | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.7492   | 885     |
+| Macro Avg | 0.6895  | 0.6848 | 0.6868   | 885     |
+| Weighted Avg | 0.7492 | 0.7492 | 0.7488  | 885     |
+
+![Confusion Matrix - XGB](media/output_90_1.png)
+
+---
+
 
 ### 5.4 Hyperparameter Tuning
 
