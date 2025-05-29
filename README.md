@@ -13,6 +13,8 @@ Referensi utama:
 - [2] Kok, C. L., Ho, C. K., Chen, L., Koh, Y. Y., & Tian, B. (2024). A Novel Predictive Modeling for Student Attrition Utilizing Machine Learning and Sustainable Big Data Analytics. Applied Sciences, 14(21), 9633.
 - [3] Martins, M. V., Baptista, L., Machado, J., & Realinho, V. (2023). Multi-class phased prediction of academic performance and dropout in higher education. Applied Sciences, 13(8), 4702.
 
+___
+
 ## **2. Business Understanding**
 
 Putus kuliah di tingkat pendidikan tinggi merupakan isu serius yang berdampak luas, baik secara institusional, personal, maupun sosial. Di banyak negara, termasuk Portugal sebagai lokasi dataset ini, angka dropout yang tinggi menyebabkan kerugian finansial bagi institusi pendidikan, meningkatnya beban ekonomi keluarga, serta rendahnya capaian pendidikan nasional.
@@ -40,6 +42,7 @@ Untuk menjawab tujuan di atas, pendekatan berikut diterapkan:
 - Membangun beberapa model klasifikasi (Logistic Regression, SVM, Decision Tree, Random Forest, XGBoost) dan membandingkan performanya berdasarkan metrik klasifikasi multikelas (accuracy, precision, recall, F1-score).
 - Menggunakan hyperparameter tuning untuk meningkatkan akurasi model terbaik, serta interpretabilitas melalui visualisasi fitur penting.
 
+___
 
 ## **3. Data Understanding**
 
@@ -105,6 +108,7 @@ berdasarkan gambar di atas maka distribusi label target menunjukkan ketidakseimb
 | Graduate  | 2209   | 49,9% |
 
 Distribusi ini memperlihatkan bahwa kelas "Graduate" merupakan mayoritas, sedangkan "Enrolled" merupakan kelas minoritas yang paling sedikit jumlahnya.
+
 
 ### 3.3. Statistik Deskriptif
 
@@ -202,6 +206,7 @@ Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear 
 
 Visualisasi dilakukan untuk masing-masing fitur yang memiliki korelasi > 0.20 atau < -0.20 terhadap target. Diagram yang digunakan meliputi pie chart, histogram dengan KDE, dan boxplot terhadap target. Visualisasi ini mengungkapkan pola yang berbeda antara mahasiswa yang dropout, masih aktif, atau sudah lulus.
 
+
 **1. Interpretasi: Tuition fees up to date**
 
 ![TuitionFee](media/output_28_0.png)
@@ -210,6 +215,7 @@ Visualisasi menunjukkan perbedaan yang sangat mencolok antara mahasiswa yang **m
 
 - Mahasiswa yang membayar tepat waktu (`1`) **dominan lulus (`Graduate`)**, jumlahnya lebih dari dua kali lipat dibandingkan kategori lainnya.
 - Sebaliknya, mahasiswa yang tidak membayar tepat waktu (`0`) memiliki jumlah **Dropout** yang signifikan, sementara angka kelulusannya sangat rendah.
+
 
 **2. Interpretasi: Scholarship holder**
 
