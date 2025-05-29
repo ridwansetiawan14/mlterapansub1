@@ -94,15 +94,15 @@ Seluruh fitur tidak memiliki missing values, dan sebagian besar merupakan data n
 ### **Distribusi Kelas (Target)**
 
 Berikut merupakan distribusi target (kelas) yang ada pada dataset ditampilkan pada gambar berikut:
+![Distribusi Kelas Target Mahasiswa](media/output_12_0.png)
 
+berdasarkan gambar di atas maka distribusi label target menunjukkan ketidakseimbangan kelas yang signifikan:
 
-Distribusi label target menunjukkan ketidakseimbangan kelas yang signifikan:
-
-| Label | Jumlah |
-|-------|--------|
-| Dropout   | 1421   |
-| Enrolled  | 794    |
-| Graduate  | 2209   |
+| Label | Jumlah | Persentase |
+|-------|--------|-------| 
+| Dropout   | 1421   | 32,1% |
+| Enrolled  | 794    | 17,9% |
+| Graduate  | 2209   | 49,9% |
 
 Distribusi ini memperlihatkan bahwa kelas "Graduate" merupakan mayoritas, sedangkan "Enrolled" merupakan kelas minoritas yang paling sedikit jumlahnya.
 
