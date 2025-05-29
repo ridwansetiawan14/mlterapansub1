@@ -99,7 +99,7 @@ Berikut merupakan distribusi target (kelas) yang ada pada dataset ditampilkan pa
 berdasarkan gambar di atas maka distribusi label target menunjukkan ketidakseimbangan kelas yang signifikan:
 
 | Label | Jumlah | Persentase |
-|-------|--------|-------| 
+|-------|--------|------------| 
 | Dropout   | 1421   | 32,1% |
 | Enrolled  | 794    | 17,9% |
 | Graduate  | 2209   | 49,9% |
