@@ -275,40 +275,208 @@ Boxplot ini menunjukkan distribusi jumlah mata kuliah yang disetujui/lulus oleh 
 - **Mahasiswa yang `Dropout` cenderung memiliki jumlah mata kuliah lulus yang sangat rendah**, dengan median mendekati nol.
 - Kelompok `Enrolled` berada di antara keduanya, namun lebih dekat ke pola `Graduate`.
 
+**7. Interpretasi: Curricular units 1st sem (grade)**
+
+![Curricular units 1st grade](media/output_41_0.png)
+
+Boxplot ini menggambarkan distribusi nilai rata-rata mahasiswa pada semester pertama, dikelompokkan berdasarkan status akhir (`Target`).
+
+- Mahasiswa yang **`Graduate` menunjukkan nilai rata-rata tertinggi**, dengan median yang konsisten di atas kelompok lain dan distribusi yang relatif rapat.
+- Mahasiswa **`Enrolled` juga memiliki distribusi nilai yang stabil**, meskipun sedikit lebih rendah dari kelompok `Graduate`.
+- Sebaliknya, kelompok **`Dropout` memiliki sebaran nilai yang sangat lebar**, dengan banyak mahasiswa yang meraih nilai sangat rendah (bahkan nol), meskipun median-nya tampak cukup tinggi secara visual — kemungkinan karena distribusi bimodal atau outlier atas.
+
+**8. Interpretasi: Curricular units 2nd sem (approved)**
+
+![Curricular units 2nd](media/output_43_0.png)
+
+Boxplot ini menunjukkan distribusi jumlah mata kuliah yang berhasil diselesaikan (lulus) oleh mahasiswa pada semester kedua berdasarkan status akademik akhir (`Target`).
+
+- Kelompok **`Graduate` menunjukkan jumlah mata kuliah lulus yang paling tinggi**, dengan median mendekati 7–8 mata kuliah.
+- Kelompok **`Enrolled` memiliki distribusi yang mirip namun sedikit lebih rendah**, menandakan progres akademik masih berlangsung.
+- Sementara itu, kelompok **`Dropout` menunjukkan distribusi nilai yang lebih rendah dan menyebar**, dengan banyak mahasiswa hanya menyelesaikan sedikit atau tidak ada mata kuliah yang lulus pada semester kedua.
+
+**9. Interpretasi: Curricular units 2nd sem (grade)**
+
+![Curricular units 2nd grade](media/output_45_0.png)
+
+Visualisasi ini menunjukkan sebaran nilai rata-rata mahasiswa pada semester kedua berdasarkan status akhir mereka (`Target`).
+
+- Mahasiswa yang **`Graduate` memiliki nilai rata-rata yang tinggi dan konsisten**, dengan median nilai antara 13–14, serta distribusi yang rapat dan simetris.
+- Kelompok **`Enrolled` juga menunjukkan nilai yang cukup baik**, meskipun sedikit lebih rendah dibandingkan `Graduate`.
+- Sebaliknya, **kelompok `Dropout` memiliki distribusi nilai yang sangat luas**, dari sangat rendah (termasuk nol) hingga tinggi, namun dengan banyak outlier, mengindikasikan ketidakstabilan performa akademik.
+
+**10. Interpretasi: Curricular units 2nd sem (enrolled)**
+
+![Curricular units 2nd grade](media/output_47_0.png)
+
+Boxplot ini memperlihatkan jumlah mata kuliah yang diambil mahasiswa pada semester kedua berdasarkan status akademik akhir (`Target`).
+
+- Mahasiswa **`Graduate` mengambil lebih banyak mata kuliah**, dengan median di atas kelompok `Dropout` dan `Enrolled`, serta distribusi yang lebih lebar dan outlier tinggi (hingga 20+ mata kuliah).
+- Kelompok **`Dropout` dan `Enrolled` memiliki jumlah mata kuliah yang diambil cenderung lebih sedikit dan lebih rapat**, dengan median sekitar 5–6.
+- Penyebaran yang sempit di kelompok Dropout menunjukkan keterlibatan akademik yang rendah di semester kedua.
+
+**11. Interpretasi: Curricular units 1st sem (enrolled)** 
+
+![Curricular units 2nd grade](media/output_49_0.png)
+
+Visualisasi ini menunjukkan distribusi jumlah mata kuliah yang diambil mahasiswa pada semester pertama, berdasarkan status akhir akademik (`Target`).
+
+- Ketiga kelompok (`Dropout`, `Graduate`, `Enrolled`) memiliki median jumlah matkul yang cukup mirip (sekitar 6), namun:
+  - **Mahasiswa `Graduate` cenderung mengambil lebih banyak mata kuliah**, dengan persebaran lebih luas ke arah atas (outlier hingga 25).
+  - **Mahasiswa `Dropout` memiliki distribusi yang lebih sempit**, dengan lebih sedikit kasus outlier atas.
+- Meskipun perbedaan tidak sejelas fitur `approved` atau `grade`, **jumlah matkul yang diambil tetap mencerminkan inisiatif akademik awal**.
+
+Nilai **korelasi Spearman sekitar +0.16** tidak cukup kuat secara statistik, namun fitur ini tetap memiliki **nilai praktis dalam mendeteksi keterlibatan awal mahasiswa**.
+
+Fitur ini cocok digunakan dalam kombinasi dengan `approved` dan `evaluations` untuk memperkuat pemodelan prediktif berbasis aktivitas akademik awal.
+
+___
+
+## **4. Data Preparation**
+
+### **4.1 Pemrosesan Awal**
+
+Langkah-langkah pemrosesan awal dilakukan untuk menyiapkan dataset agar siap dianalisis dan digunakan dalam model pembelajaran mesin. Berikut tahapan yang dilakukan:
+
+1. **Pengaturan format pembacaan dataset:**
+   Dataset berformat `.csv` dengan delimiter `;`, sehingga perlu disesuaikan saat pemanggilan agar data terbaca dengan benar.
+
+2. **Pembersihan dan normalisasi nama kolom:**
+   Beberapa nama kolom memiliki karakter tab atau spasi yang tidak konsisten. Oleh karena itu:
+   - Semua nama kolom dikonversi ke format bersih dengan mengganti spasi/tab dengan underscore.
+   - Seluruh huruf diubah menjadi huruf kecil untuk konsistensi penamaan.
+
+3. **Konversi label target:**
+   Fitur target (`Target`) awalnya berupa nilai teks seperti `Dropout`, `Enrolled`, dan `Graduate`.
+   - Label ini dikonversi menjadi angka: `0` untuk Dropout, `1` untuk Enrolled, dan `2` untuk Graduate, agar bisa digunakan dalam algoritma klasifikasi.
+
+4. **Pemeriksaan missing values:**
+   Dikonfirmasi bahwa tidak ada nilai kosong pada seluruh kolom. Ini sesuai dengan dokumentasi dataset bahwa telah dilakukan preprocessing ketat oleh pemilik data.
+
+5. **Pemeriksaan tipe data:**
+   Semua kolom dicek apakah bertipe numerik atau tidak. Sebagian besar fitur kategorik sudah dikodekan dalam bentuk angka (biner atau ordinal), sehingga tidak perlu dilakukan encoding tambahan.
+   
+
+### **4.2 Encoding**
+
+Dataset ini telah melalui proses pra-pemrosesan sebelumnya oleh penyusun aslinya, sehingga sebagian besar fitur kategorikal telah dikonversi ke bentuk numerik (misalnya: `Gender`, `Scholarship holder`, `Debtor`).
+
+Namun, target (`Target`) masih berupa string: `Dropout`, `Enrolled`, `Graduate`. Oleh karena itu, pada tahap ini hanya dilakukan encoding terhadap label target menjadi angka:
+
+- Dropout = 0
+- Enrolled = 1
+- Graduate = 2
+  
+
+### **4.3 Pemisahan Fitur dan Target**
+
+Data dibagi menjadi fitur (X) dan target (y), diikuti dengan pemisahan data latih dan data uji dengan proporsi 80:20. Ini dilakukan untuk mengevaluasi model secara adil.
+
+Ukuran data setelah pemisahan:
+- X_train: (3539, 11)
+- X_test: (885, 11)
+
+Distribusi target pada data latih menunjukkan ketidakseimbangan kelas:
+| Label | Kategori  | Jumlah |
+|-------|-----------|--------|
+| 0     | Dropout   | 1137   |
+| 1     | Enrolled  | 635    |
+| 2     | Graduate  | 1767   |
 
 
 
+### **4.4 Penanganan Data Tidak Seimbang**
+
+Ketidakseimbangan kelas ditangani dengan kombinasi metode SMOTE dan Tomek Links. Pendekatan ini menggabungkan oversampling untuk kelas minoritas dan undersampling untuk menghapus pasangan data yang ambigu antar kelas.
+
+Distribusi target sebelum dan sesudah resampling:
+
+| Label | Kategori  | Sebelum SMOTE-Tomek | Sesudah SMOTE-Tomek |
+|-------|-----------|----------------------|----------------------|
+| 0     | Dropout   | 1137                 | 1690                 |
+| 1     | Enrolled  | 635                  | 1683                 |
+| 2     | Graduate  | 1767                 | 1668                 |
+
+Setelah tahap ini, data siap digunakan dalam proses pemodelan.
 
 
-### 3.6 Visualisasi Pairwise dan Distribusi Numerik
+## 5. Modeling
 
-Visualisasi tambahan menggunakan pairplot dan histogram terpisah menunjukkan bahwa sebagian besar fitur numerik memiliki distribusi yang tidak simetris dan terdapat perbedaan mencolok antar kelas, terutama pada performa akademik mahasiswa.
+### 5.1 Pemilihan Model
 
+Masalah prediksi status akhir mahasiswa dikategorikan sebagai klasifikasi multikelas dengan tiga kelas target: Dropout (0), Enrolled (1), dan Graduate (2). Oleh karena itu, digunakan lima algoritma model pembelajaran mesin untuk dibandingkan, yaitu:
 
+- Logistic Regression
+- Support Vector Machine (SVM)
+- Decision Tree
+- Random Forest
+- XGBoost
 
+Model dipilih berdasarkan kapabilitas masing-masing:
+- LR dan SVM mewakili model linier,
+- DT sebagai model interpretable,
+- RF dan XGBoost sebagai model ensemble yang kuat terhadap noise dan ketidakseimbangan data.
 
+### 5.2 Pelatihan Model
 
+Semua model dilatih menggunakan data hasil resampling dengan SMOTE-Tomek. Evaluasi dilakukan pada data uji untuk mengukur generalisasi model.
 
+Metrik evaluasi utama:
+- Accuracy
+- Precision, Recall, F1-score per kelas
+- Confusion Matrix untuk visualisasi kesalahan klasifikasi
 
+### 5.3 Hasil Evaluasi Awal Model
 
+Berikut hasil evaluasi awal (sebelum tuning) dari lima model yang digunakan:
 
+| Model              | Accuracy | Macro F1-score | Keterangan                           |
+|-------------------|----------|----------------|--------------------------------------|
+| Logistic Regression | 72.5%    | 68.7%          | Seimbang, namun belum optimal        |
+| SVM               | 71.4%    | 67.9%          | Mirip LR, namun cenderung rigid      |
+| Decision Tree     | 67.3%    | 60.4%          | Cenderung overfitting                |
+| Random Forest     | 74.8%    | 68.5%          | Performa stabil, basis ensemble      |
+| XGBoost           | 74.9%    | 68.6%          | Stabil & menjanjikan untuk dituning  |
 
+Visualisasi classification report & confusion matrix untuk tiap model:
 
+- **[Gambar 1: Classification Report & Confusion Matrix - Logistic Regression]**
+- **[Gambar 2: Classification Report & Confusion Matrix - SVM]**
+- **[Gambar 3: Classification Report & Confusion Matrix - Decision Tree]**
+- **[Gambar 4: Classification Report & Confusion Matrix - Random Forest]**
+- **[Gambar 5: Classification Report & Confusion Matrix - XGBoost]**
 
+### 5.4 Hyperparameter Tuning
 
+Dua model terbaik (Random Forest & XGBoost) dipilih untuk dilakukan hyperparameter tuning menggunakan **GridSearchCV** dengan 5-fold cross-validation. Tujuan tuning adalah mengoptimalkan parameter yang paling memengaruhi kinerja model untuk meningkatkan F1-score macro.
 
+#### Hasil Tuning - Random Forest
 
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+- Best Parameters:
+  - `n_estimators = 200`
+  - `max_depth = None`
+  - `max_features = 'sqrt'`
+  - `min_samples_split = 2`
+  - `min_samples_leaf = 1`
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+- F1 Macro (setelah tuning): **~68%** *(tidak jauh berbeda dengan default)*
 
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+- **[Gambar 6: Confusion Matrix & Classification Report - Random Forest Tuned]**
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+#### Hasil Tuning - XGBoost
+
+- Best Parameters:
+  - `n_estimators = 200`
+  - `max_depth = 10`
+  - `learning_rate = 0.2`
+  - `subsample = 0.8`
+  - `colsample_bytree = 1.0`
+
+- F1 Macro (setelah tuning): **~67%**
+
+- **[Gambar 7: Confusion Matrix & Classification Report - XGBoost Tuned]**
+
+Perbandingan hasil sebelum dan sesudah tuning disimpulkan bahwa performa tidak meningkat secara signifikan, namun tuning tetap diperlukan untuk mengkonfirmasi stabilitas model dan menghindari overfitting.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
