@@ -108,9 +108,41 @@ Distribusi ini memperlihatkan bahwa kelas "Graduate" merupakan mayoritas, sedang
 
 ### 3.3 Statistik Deskriptif
 
-Statistik deskriptif untuk variabel numerik menunjukkan adanya variasi yang cukup besar, terutama pada fitur nilai akademik dan jumlah mata kuliah. Hal ini memberikan indikasi awal bahwa beberapa fitur memiliki potensi prediktif yang kuat.
+Statistik deskriptif memberikan ringkasan awal terhadap fitur numerik dan kategorikal dalam dataset. Tujuannya untuk:
+
+- Menilai distribusi, rentang, dan potensi outlier.
+- Mengidentifikasi fitur yang perlu normalisasi.
+- Mendeteksi fitur numerik yang sebenarnya kategorikal berdasarkan variasi nilai unik.
+
+Meskipun banyak fitur direpresentasikan sebagai integer, analisis `nunique()` menunjukkan bahwa sejumlah fitur memiliki jumlah kategori yang terbatas (< 20), sehingga secara fungsional harus dianggap sebagai fitur **kategorikal**. Fitur-fitur tersebut adalah:
+
+- `Marital status` (6 kategori)
+- `Application mode` (18 kategori)
+- `Application order` (8 kategori)
+- `Course` (17 kategori)
+- `Daytime/evening attendance\t` (2 kategori)
+- `Previous qualification` (17 kategori)
+- `Displaced` (2 kategori)
+- `Educational special needs` (2 kategori)
+- `Debtor` (2 kategori)
+- `Tuition fees up to date` (2 kategori)
+- `Gender` (2 kategori)
+- `Scholarship holder` (2 kategori)
+- `International` (2 kategori)
+- `Curricular units 1st sem (without evaluations)` (11 kategori)
+- `Curricular units 2nd sem (credited)` (19 kategori)
+- `Curricular units 2nd sem (without evaluations)` (10 kategori)
+- `Unemployment rate` (10 nilai unik)
+- `Inflation rate` (9 nilai unik)
+- `GDP` (10 nilai unik)
+- `Target` (3 kategori)
+
+Fitur-fitur tersebut akan dipertimbangkan sebagai kategorikal saat proses encoding sebelum modeling, meskipun secara teknis bertipe integer.
 
 ### 3.4 Korelasi Antar Fitur
+
+Analisis korelasi Spearman dengan hasil:
+![Heatmap Korelasi Spearman](media/output_22_1.png)
 
 Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear dan ordinal. Hasil analisis menunjukkan bahwa fitur-fitur berikut memiliki korelasi signifikan terhadap status akhir mahasiswa:
 
