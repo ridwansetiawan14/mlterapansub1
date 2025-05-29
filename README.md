@@ -417,7 +417,7 @@ Model dipilih berdasarkan kapabilitas masing-masing:
 - DT sebagai model interpretable,
 - RF dan XGBoost sebagai model ensemble yang kuat terhadap noise dan ketidakseimbangan data.
 
-### 5.2 Pelatihan Model
+### **5.2 Pelatihan Model**
 
 Semua model dilatih menggunakan data hasil resampling dengan SMOTE-Tomek. Evaluasi dilakukan pada data uji untuk mengukur generalisasi model.
 
@@ -426,7 +426,7 @@ Metrik evaluasi utama:
 - Precision, Recall, F1-score per kelas
 - Confusion Matrix untuk visualisasi kesalahan klasifikasi
 
-### 5.3 Hasil Evaluasi Awal Model
+### **5.3 Hasil Evaluasi Awal Model**
 
 Berikut hasil evaluasi awal (sebelum tuning) dari lima model yang digunakan:
 
@@ -518,7 +518,7 @@ ___
 ---
 
 
-### 5.4 Hyperparameter Tuning
+### **5.4 Hyperparameter Tuning**
 
 Dua model terbaik (Random Forest & XGBoost) dipilih untuk dilakukan hyperparameter tuning menggunakan **GridSearchCV** dengan 5-fold cross-validation. Tujuan tuning adalah mengoptimalkan parameter yang paling memengaruhi kinerja model untuk meningkatkan F1-score macro.
 
@@ -533,8 +533,20 @@ Dua model terbaik (Random Forest & XGBoost) dipilih untuk dilakukan hyperparamet
 
 - F1 Macro (setelah tuning): **~68%** *(tidak jauh berbeda dengan default)*
 
-- **[Gambar 6: Confusion Matrix & Classification Report - Random Forest Tuned]**
+- **Confusion Matrix & Classification Report - Random Forest Tuned**
 
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.80      | 0.73   | 0.76     | 284     |
+| 1     | 0.45      | 0.45   | 0.45     | 159     |
+| 2     | 0.82      | 0.87   | 0.84     | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.75     | 885     |
+| Macro Avg | 0.69    | 0.68   | 0.68     | 885     |
+| Weighted Avg | 0.75   | 0.75   | 0.75     | 885     |
+
+![Confusion Matrix - RFT](media/output_101_1.png)
+___
 #### Hasil Tuning - XGBoost
 
 - Best Parameters:
@@ -546,40 +558,101 @@ Dua model terbaik (Random Forest & XGBoost) dipilih untuk dilakukan hyperparamet
 
 - F1 Macro (setelah tuning): **~67%**
 
-- **[Gambar 7: Confusion Matrix & Classification Report - XGBoost Tuned]**
+- **Confusion Matrix & Classification Report - XGBoost Tuned**
+  
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|---------|
+| 0     | 0.77      | 0.75   | 0.76     | 284     |
+| 1     | 0.42      | 0.40   | 0.41     | 159     |
+| 2     | 0.82      | 0.85   | 0.84     | 442     |
+|-------|-----------|--------|----------|---------|
+| Accuracy |         |        | 0.74     | 885     |
+| Macro Avg | 0.67    | 0.67   | 0.67     | 885     |
+| Weighted Avg | 0.73   | 0.74   | 0.74     | 885     |
+
+![Confusion Matrix - XGBT](media/output_105_1.png)
+___
 
 Perbandingan hasil sebelum dan sesudah tuning disimpulkan bahwa performa tidak meningkat secara signifikan, namun tuning tetap diperlukan untuk mengkonfirmasi stabilitas model dan menghindari overfitting.
 
-## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+___
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+## **6. Evaluation**
 
-## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+### **6.1 Model Terbaik**
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+Berdasarkan hasil evaluasi terhadap lima model klasifikasi (Logistic Regression, SVM, Decision Tree, Random Forest, dan XGBoost), model **XGBoost** dipilih sebagai model terbaik.
 
-## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+**Alasan Pemilihan:**
+- Meskipun memiliki akurasi keseluruhan yang sebanding dengan Random Forest (~74%), **XGBoost memiliki recall dan f1-score yang lebih seimbang**, terutama untuk kelas Dropout (0) dan Graduate (2).
+- Model mampu menangkap kompleksitas data tanpa overfitting signifikan.
+- Performa pada kelas Dropout sangat penting dalam konteks intervensi pendidikan, dan XGBoost memberikan sensitivitas yang lebih baik dibandingkan model lain.
+- Stabil meskipun digunakan pada data hasil resampling, serta dapat ditingkatkan lebih lanjut melalui tuning lanjutan atau integrasi fitur tambahan.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+XGBoost juga mendukung interpretasi dengan pendekatan SHAP secara langsung, yang memperkuat keunggulannya sebagai model produksi untuk sistem prediktif pada mahasiswa.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+___
+### **6.2 Interpretasi Model (SHAP)**
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Untuk memahami bagaimana model membuat keputusan, digunakan teknik interpretasi **SHAP (SHapley Additive exPlanations)**. SHAP membantu menjelaskan kontribusi masing-masing fitur terhadap prediksi kelas secara individual maupun global.
 
-**---Ini adalah bagian akhir laporan---**
+**Gambar: SHAP Summary Plot (bar)** – Menunjukkan fitur-fitur paling berpengaruh secara global.
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+![SHAP Summary Plot (bar)](media/output_108_0.png)
 
+Berdasarkan visualisasi SHAP, dapat disimpulkan bahwa fitur-fitur berikut memiliki pengaruh paling signifikan terhadap prediksi model XGBoost:
+
+**Fitur Paling Berpengaruh (Global Importance):**
+1. **Curricular units 2nd sem (approved)** — fitur paling dominan dalam membedakan mahasiswa yang lulus (Class 2)
+2. **Curricular units 1st sem (approved)** — penting untuk semua kelas (lulus, dropout, enrolled)
+3. **Age at enrollment** — mahasiswa yang lebih tua cenderung tidak lulus tepat waktu
+4. **Rata-rata nilai di semester 1 & 2** (grade) — berkaitan langsung dengan performa akademik
+5. **Jumlah matkul diambil** — mengindikasikan keterlibatan akademik
+
+**Observasi Tambahan:**
+- Fitur **"Tuition fees up to date"** juga memberi sinyal kuat terhadap risiko dropout (Class 0)
+- Fitur seperti **Scholarship holder**, **Gender**, dan **Debtor** juga masuk 10 besar, tapi pengaruhnya lebih kecil
+- Kelas warna:
+  - Biru → Graduate
+  - Merah muda → Dropout
+  - Hijau zaitun → Enrolled
+
+**Kesimpulan:**
+- Mahasiswa yang **aktif, lulus banyak mata kuliah, dan mendapatkan nilai baik** di dua semester pertama lebih besar kemungkinan untuk **lulus**
+- Sedangkan keterlambatan pembayaran dan beban akademik yang rendah cenderung mengarah ke **dropout**
+
+Interpretasi ini dapat menjadi dasar peringatan dini dan intervensi kebijakan pada sistem pendidikan tinggi.
+
+
+### **6.3 Validasi Hasil**
+
+Walaupun akurasi keseluruhan cukup baik, perlu dicatat beberapa keterbatasan:
+- Performa klasifikasi kelas “Enrolled” cenderung lebih rendah (f1-score < 0.5).
+- Kompleksitas hubungan antar fitur dan noise pada data bisa memengaruhi stabilitas model.
+
+Namun demikian, secara umum model berhasil mengidentifikasi pola-pola dropout secara cukup baik dan dapat dijadikan dasar pengembangan sistem peringatan dini.
+
+---
+
+## **7. Kesimpulan**
+
+Penelitian ini bertujuan untuk membangun model prediktif yang dapat mengklasifikasikan status akhir mahasiswa dalam tiga kategori: Dropout, Enrolled, dan Graduate. Proses analisis dilakukan terhadap data riil yang mencakup informasi demografis, akademik, dan sosial ekonomi mahasiswa saat mendaftar.
+
+### **Jawaban terhadap Pernyataan Masalah:**
+
+1. **Apa faktor utama yang memengaruhi risiko mahasiswa mengalami dropout?**
+   - Berdasarkan analisis korelasi dan interpretasi model (SHAP), ditemukan bahwa performa akademik pada semester awal (jumlah mata kuliah lulus dan nilai rata-rata), status keuangan (keterlambatan pembayaran biaya kuliah), dan usia saat pendaftaran merupakan indikator signifikan terhadap status akhir mahasiswa.
+
+2. **Apakah model pembelajaran mesin dapat memprediksi status akhir mahasiswa secara akurat?**
+   - Model XGBoost yang digunakan berhasil mencapai akurasi sebesar 74% dengan macro F1-score sekitar 67%, menunjukkan kinerja yang cukup kuat dalam skenario klasifikasi multikelas yang kompleks dan imbalanced.
+
+3. **Bagaimana kontribusi model ini terhadap pengambilan keputusan di institusi pendidikan?**
+   - Model yang dibangun dapat digunakan sebagai sistem pendukung keputusan (decision support system) untuk mengidentifikasi mahasiswa berisiko dropout sejak dini, sehingga intervensi akademik dan dukungan finansial dapat ditargetkan secara lebih efektif.
+
+### **Ringkasan Akhir:**
+
+- Model XGBoost menjadi pilihan terbaik setelah melalui evaluasi lima algoritma pembelajaran mesin.
+- SMOTE-Tomek digunakan untuk menangani ketidakseimbangan kelas pada data pelatihan.
+- SHAP digunakan untuk memberikan interpretasi terhadap pengaruh fitur terhadap prediksi model.
+- Kinerja model masih bisa ditingkatkan, terutama untuk prediksi kelas “Enrolled” yang memiliki performa relatif rendah.
+- Pendekatan ini menunjukkan potensi besar dalam membantu institusi pendidikan tinggi menurunkan angka dropout dan meningkatkan tingkat kelulusan melalui intervensi berbasis data.
