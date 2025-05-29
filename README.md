@@ -400,9 +400,9 @@ Distribusi target sebelum dan sesudah resampling:
 Setelah tahap ini, data siap digunakan dalam proses pemodelan.
 
 
-## 5. Modeling
+## **5. Modeling**
 
-### 5.1 Pemilihan Model
+### **5.1 Pemilihan Model**
 
 Masalah prediksi status akhir mahasiswa dikategorikan sebagai klasifikasi multikelas dengan tiga kelas target: Dropout (0), Enrolled (1), dan Graduate (2). Oleh karena itu, digunakan lima algoritma model pembelajaran mesin untuk dibandingkan, yaitu:
 
@@ -440,7 +440,21 @@ Berikut hasil evaluasi awal (sebelum tuning) dari lima model yang digunakan:
 
 Visualisasi classification report & confusion matrix untuk tiap model:
 
-- **[Gambar 1: Classification Report & Confusion Matrix - Logistic Regression]**
+1. Classification Report & Confusion Matrix - Logistic Regression
+   `Logistic Regression - Classification Report`
+              `precision`    `recall`  `f1-score`   `support`
+
+           0     0.8632    0.6444    0.7379       284
+           1     0.4032    0.6415    0.4951       159
+           2     0.8500    0.8077    0.8283       442
+
+    accuracy                         0.7254       885
+   macro avg     0.7055    0.6979    0.6871       885
+weighted avg     0.7740    0.7254    0.7394       885
+
+
+3. 
+  
 - **[Gambar 2: Classification Report & Confusion Matrix - SVM]**
 - **[Gambar 3: Classification Report & Confusion Matrix - Decision Tree]**
 - **[Gambar 4: Classification Report & Confusion Matrix - Random Forest]**
