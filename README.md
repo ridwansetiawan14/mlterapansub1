@@ -7,10 +7,11 @@ Proyek ini berfokus pada bidang **pendidikan tinggi**, khususnya analisis risiko
 Studi ini menggunakan data yang dikumpulkan dari universitas di Portugal yang mencakup informasi demografis, akademik, serta sosial ekonomi mahasiswa pada saat awal pendaftaran. Tujuan dari proyek ini adalah memprediksi status akhir mahasiswa—dropout, masih aktif (enrolled), atau lulus (graduate)—dengan pendekatan pembelajaran mesin (machine learning).
 
 Sumber data: https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success  
+
 Referensi utama: 
-[1] Martins, M. V., Tolledo, D., Machado, J., Baptista, L. M., & Realinho, V. (2021). Early prediction of student’s performance in higher education: A case study. In Trends and Applications in Information Systems and Technologies: Volume 1 9 (pp. 166-175). Springer International Publishing.
-[2] Kok, C. L., Ho, C. K., Chen, L., Koh, Y. Y., & Tian, B. (2024). A Novel Predictive Modeling for Student Attrition Utilizing Machine Learning and Sustainable Big Data Analytics. Applied Sciences, 14(21), 9633.
-[3] Martins, M. V., Baptista, L., Machado, J., & Realinho, V. (2023). Multi-class phased prediction of academic performance and dropout in higher education. Applied Sciences, 13(8), 4702.
+- [1] Martins, M. V., Tolledo, D., Machado, J., Baptista, L. M., & Realinho, V. (2021). Early prediction of student’s performance in higher education: A case study. In Trends and Applications in Information Systems and Technologies: Volume 1 9 (pp. 166-175). Springer International Publishing.
+- [2] Kok, C. L., Ho, C. K., Chen, L., Koh, Y. Y., & Tian, B. (2024). A Novel Predictive Modeling for Student Attrition Utilizing Machine Learning and Sustainable Big Data Analytics. Applied Sciences, 14(21), 9633.
+- [3] Martins, M. V., Baptista, L., Machado, J., & Realinho, V. (2023). Multi-class phased prediction of academic performance and dropout in higher education. Applied Sciences, 13(8), 4702.
 
 ## **Business Understanding**
 
