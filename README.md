@@ -47,6 +47,7 @@ ___
 ## **3. Data Understanding**
 
 Dataset yang digunakan dalam proyek ini diperoleh dari repositori UCI Machine Learning yang berjudul [Predict Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/).dan berisi 4.424 data mahasiswa yang bersumber dari `perguruan tinggi di portugal`. Masing-masing baris mewakili satu mahasiswa dengan total 37 atribut, termasuk informasi demografis, akademik, sosial ekonomi, serta label status akhir mahasiswa (Target).
+___
 
 ### **3.1. Deskripsi Fitur**
 
@@ -94,6 +95,8 @@ Fitur ke-37 adalah:
 
 Seluruh fitur tidak memiliki missing values, dan sebagian besar merupakan data numerik atau dikodekan sebagai angka kategorik.
 
+___
+
 ### **3.2. Distribusi Kelas (Target)**
 
 Berikut merupakan distribusi target (kelas) yang ada pada dataset ditampilkan pada gambar berikut:
@@ -109,7 +112,7 @@ berdasarkan gambar di atas maka distribusi label target menunjukkan ketidakseimb
 
 Distribusi ini memperlihatkan bahwa kelas "Graduate" merupakan mayoritas, sedangkan "Enrolled" merupakan kelas minoritas yang paling sedikit jumlahnya.
 
-
+___
 ### 3.3. Statistik Deskriptif
 
 Statistik deskriptif memberikan ringkasan awal terhadap fitur numerik dan kategorikal dalam dataset. Tujuannya untuk:
@@ -143,6 +146,7 @@ Meskipun banyak fitur direpresentasikan sebagai integer, analisis `nunique()` me
 
 Fitur-fitur tersebut akan dipertimbangkan sebagai kategorikal saat proses encoding sebelum modeling, meskipun secara teknis bertipe integer.
 
+___
 ### 3.4. Korelasi Antar Fitur
 
 Analisis korelasi Spearman dengan hasil:
@@ -202,6 +206,7 @@ Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear 
 - Curricular units 2nd sem (enrolled): 0.17
 - Admission grade: 0.13
 
+___
 ### 3.5. Visualisasi Fitur Utama
 
 Visualisasi dilakukan untuk masing-masing fitur yang memiliki korelasi > 0.20 atau < -0.20 terhadap target. Diagram yang digunakan meliputi pie chart, histogram dengan KDE, dan boxplot terhadap target. Visualisasi ini mengungkapkan pola yang berbeda antara mahasiswa yang dropout, masih aktif, atau sudah lulus.
@@ -215,7 +220,7 @@ Visualisasi menunjukkan perbedaan yang sangat mencolok antara mahasiswa yang **m
 
 - Mahasiswa yang membayar tepat waktu (`1`) **dominan lulus (`Graduate`)**, jumlahnya lebih dari dua kali lipat dibandingkan kategori lainnya.
 - Sebaliknya, mahasiswa yang tidak membayar tepat waktu (`0`) memiliki jumlah **Dropout** yang signifikan, sementara angka kelulusannya sangat rendah.
-____
+
 
 **2. Interpretasi: Scholarship holder**
 
@@ -225,7 +230,53 @@ Dari grafik terlihat perbedaan distribusi yang cukup signifikan antara mahasiswa
 
 - Di antara **non-penerima beasiswa (0)**, jumlah `Dropout` dan `Graduate` relatif tinggi dan seimbang, tetapi tetap menunjukkan bahwa banyak mahasiswa yang **tidak menerima beasiswa cenderung mengalami dropout**.
 - Sebaliknya, **penerima beasiswa (1)** didominasi oleh mahasiswa yang berhasil **`Graduate`**, sementara jumlah `Dropout` jauh lebih rendah.
-____
+
+**3.Interpretasi: Debtor**
+
+![Debtor](media/output_32_0.png)
+
+Fitur `Debtor` mengindikasikan apakah mahasiswa memiliki tunggakan finansial (`1`) atau tidak (`0`). Visualisasi menunjukkan pola yang cukup jelas:
+
+- Sebagian besar mahasiswa **tidak memiliki tunggakan (0)**, dan dalam kelompok ini, **jumlah yang lulus (`Graduate`) sangat tinggi**, diikuti oleh `Dropout` dan `Enrolled`.
+- Sebaliknya, di antara mahasiswa yang memiliki tunggakan (`1`), **jumlah `Dropout` jauh lebih tinggi** dibandingkan `Graduate`, yang sangat kecil.
+
+**4.Interpretasi: Gender**
+
+![Gender](media/output_34_0.png)
+
+Dalam dataset ini, `Gender` dikodekan sebagai:
+- `0 = Perempuan`
+- `1 = Laki-laki`
+
+Dari visualisasi:
+
+- **Mahasiswa perempuan (`0`) menunjukkan jumlah kelulusan (`Graduate`) yang sangat tinggi**, jauh melebihi jumlah `Dropout` dan `Enrolled`.
+- Sebaliknya, **mahasiswa laki-laki (`1`) memiliki jumlah `Dropout` hampir sama atau bahkan sedikit lebih tinggi dibandingkan `Graduate`**, menunjukkan risiko kegagalan akademik yang lebih besar.
+
+**5.Interpretasi: Age at enrollment**
+
+![Age](media/output_36_0.png)
+
+Histogram ini menunjukkan distribusi frekuensi usia mahasiswa saat pendaftaran ke perguruan tinggi.
+
+- Distribusi jelas **memiliki kemiringan kanan (right-skewed)**.
+- Sebagian besar mahasiswa mendaftar pada rentang usia **17 hingga 22 tahun**, yang merupakan usia kuliah tipikal.
+- Terlihat adanya **outlier signifikan** hingga usia 60+, yang meskipun jarang, tetap penting untuk analisis dropout.
+- Distribusi ini mendukung temuan sebelumnya bahwa **usia yang lebih tua saat pendaftaran memiliki korelasi negatif dengan keberhasilan akademik**, sebagaimana terlihat dalam analisis korelasi dan boxplot terhadap `Target`.
+
+
+**6. Interpretasi: Curricular units 1st sem (approved)**
+
+![Curricular units 1st](media/output_39_0.png)
+
+Boxplot ini menunjukkan distribusi jumlah mata kuliah yang disetujui/lulus oleh mahasiswa pada semester pertama, berdasarkan status akhir mereka (`Target`).
+
+- **Mahasiswa yang `Graduate` memiliki median jumlah mata kuliah lulus yang paling tinggi** pada semester pertama, dengan persebaran nilai yang cukup konsisten dan banyak outlier di level atas (sangat aktif).
+- **Mahasiswa yang `Dropout` cenderung memiliki jumlah mata kuliah lulus yang sangat rendah**, dengan median mendekati nol.
+- Kelompok `Enrolled` berada di antara keduanya, namun lebih dekat ke pola `Graduate`.
+
+
+
 
 
 
