@@ -144,6 +144,46 @@ Fitur-fitur tersebut akan dipertimbangkan sebagai kategorikal saat proses encodi
 Analisis korelasi Spearman dengan hasil:
 ![Heatmap Korelasi Spearman](media/output_22_1.png)
 
+| Fitur | Student Status |
+|---|---|
+| Student Status | 1.000000 |
+| Curricular units 2nd sem (approved) | 0.654049 |
+| Curricular units 1st sem (approved) | 0.594194 |
+| Curricular units 2nd sem (grade) | 0.559820 |
+| Curricular units 1st sem (grade) | 0.497341 |
+| Tuition fees up to date | 0.400283 |
+| Scholarship holder | 0.301103 |
+| Curricular units 2nd sem (enrolled) | 0.241456 |
+| Curricular units 1st sem (enrolled) | 0.230576 |
+| Admission grade | 0.125791 |
+| Displaced | 0.113241 |
+| Previous qualification (grade) | 0.112414 |
+| Application order | 0.102185 |
+| Daytime/evening attendance\t | 0.073066 |
+| GDP | 0.053497 |
+| Curricular units 2nd sem (credited) | 0.035004 |
+| Mother's occupation | 0.032700 |
+| Father's occupation | 0.032265 |
+| Curricular units 2nd sem (evaluations) | 0.028444 |
+| Father's qualification | 0.024058 |
+| Curricular units 1st sem (credited) | 0.019971 |
+| Unemployment rate | 0.016378 |
+| Course | 0.014122 |
+| International | 0.002860 |
+| Nacionality | 0.002535 |
+| Educational special needs | -0.007953 |
+| Mother's qualification | -0.018999 |
+| Inflation rate | -0.022259 |
+| Curricular units 1st sem (evaluations) | -0.027602 |
+| Curricular units 1st sem (without evaluations) | -0.081031 |
+| Curricular units 2nd sem (without evaluations) | -0.089313 |
+| Marital status | -0.103578 |
+| Previous qualification | -0.125939 |
+| Application mode | -0.214098 |
+| Gender | -0.229616 |
+| Debtor | -0.239002 |
+| Age at enrollment | -0.284946 |
+
 Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear dan ordinal. Hasil analisis menunjukkan bahwa fitur-fitur berikut memiliki korelasi signifikan terhadap status akhir mahasiswa:
 
 - Curricular units 2nd sem (approved): 0.62
@@ -161,6 +201,8 @@ Analisis korelasi Spearman dipilih karena lebih robust terhadap data non-linear 
 ### 3.5 Visualisasi Fitur Utama
 
 Visualisasi dilakukan untuk masing-masing fitur yang memiliki korelasi > 0.20 atau < -0.20 terhadap target. Diagram yang digunakan meliputi pie chart, histogram dengan KDE, dan boxplot terhadap target. Visualisasi ini mengungkapkan pola yang berbeda antara mahasiswa yang dropout, masih aktif, atau sudah lulus.
+
+
 
 ### 3.6 Visualisasi Pairwise dan Distribusi Numerik
 
