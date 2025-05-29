@@ -215,7 +215,7 @@ Visualisasi menunjukkan perbedaan yang sangat mencolok antara mahasiswa yang **m
 
 - Mahasiswa yang membayar tepat waktu (`1`) **dominan lulus (`Graduate`)**, jumlahnya lebih dari dua kali lipat dibandingkan kategori lainnya.
 - Sebaliknya, mahasiswa yang tidak membayar tepat waktu (`0`) memiliki jumlah **Dropout** yang signifikan, sementara angka kelulusannya sangat rendah.
-
+____
 
 **2. Interpretasi: Scholarship holder**
 
@@ -225,6 +225,7 @@ Dari grafik terlihat perbedaan distribusi yang cukup signifikan antara mahasiswa
 
 - Di antara **non-penerima beasiswa (0)**, jumlah `Dropout` dan `Graduate` relatif tinggi dan seimbang, tetapi tetap menunjukkan bahwa banyak mahasiswa yang **tidak menerima beasiswa cenderung mengalami dropout**.
 - Sebaliknya, **penerima beasiswa (1)** didominasi oleh mahasiswa yang berhasil **`Graduate`**, sementara jumlah `Dropout` jauh lebih rendah.
+____
 
 
 
